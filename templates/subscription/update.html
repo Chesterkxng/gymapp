@@ -1,5 +1,4 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h5 class="mb-0"><strong>ABONNEMENTS</strong></h5>
 <span class="text-secondary"
   >Abonnements <i class="fa fa-angle-right"></i> Modification</span
@@ -12,12 +11,27 @@
       <p class="mb-2">Veuillez remplir les informations suivantes</p>
 
       <form
-        action="{% url 'updateSubscription' subscription.id %}"
+        action="{% url 'updateSubscription' %}"
         method="post"
         id="validation_style"
         class="mt-3"
       >
         {% csrf_token %}
+
+        <input
+          type="hidden"
+          id="id"
+          name="id"
+          class="form-control"
+          value="{{subscription.id}}"
+        />
+        <input
+          type="hidden"
+          id="updateStatus"
+          name="updateStatus"
+          class="form-control"
+          value="true"
+        />
         <div class="form-group row">
           <label for="surname" class="col-sm-3">NOM</label>
           <div class="col-sm-9">

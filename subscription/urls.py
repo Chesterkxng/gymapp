@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('subscriptions/', views.subscriptions, name='subscriptions'),
     path('addSubscription/', views.addSubscription, name='addSubscription'),
-    path('updateSubscription/<int:id>', views.updateSubscription, name='updateSubscription'),
-    path('reconductSubscription/<int:id>', views.reconductSubscription, name='reconductSubscription')
+    path('updateSubscription/', views.updateSubscription, name='updateSubscription'),
+    path('reconductSubscription/', views.reconductSubscription, name='reconductSubscription'),
+    path('deleteSubscription/', views.deleteSubscription, name='deleteSubscription')
 ]

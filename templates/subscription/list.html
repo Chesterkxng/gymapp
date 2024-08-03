@@ -35,31 +35,37 @@
               <td>{{ subscription.endDate|date:'d-m-Y' }}</td>
               {% if subscription.status %}
               <td>
-                <label class="badge badge-success badge-pill">EN COURS</label>
+                <span class="badge badge-success badge-pill">EN COURS</span>
               </td>
               {% else %}
               <td>
-                <label class="badge badge-danger badge-pill"> EXPIRE </label>
+                <span class="badge badge-danger badge-pill"> EXPIRE </span>
               </td>
               {% endif %}
               <td>
                 <div class="d-flex justify-content-around">
                   <!--Check if the subscription have been expired for showing reconduction button-->
                   {% if not subscription.status %}
-                  <a href="{% url 'reconductSubscription' subscription.id %}"
-                    ><button type="button" class="btn btn-secondary">
+                  <form method="post" action="{% url 'reconductSubscription' %}"
+                    > {% csrf_token %}
+                    <input type="hidden" name="id" id="id" value="{{subscription.id}}">
+                    <button type="submit" class="btn btn-secondary">
                       <i class="fa fa-arrow-right"></i></button
-                  ></a>
+                  ></form>
                   {% endif %}
                   <!-- END CHECK-->
-                  <a href="{% url 'updateSubscription' subscription.id %}"
-                    ><button type="button" class="btn btn-info">
+                  <form method="post" action="{% url 'updateSubscription' %}"
+                    >{% csrf_token %}
+                    <input type="hidden" name="id" id="id" value="{{subscription.id}}">
+                    <button type="submit" class="btn btn-info">
                       <i class="fa fa-pencil"></i></button
-                  ></a>
-                  <a href=""
-                    ><button type="button" class="btn btn-danger">
+                  ></form>
+                  <form method="post" action="{% url 'deleteSubscription' %}"
+                    >{% csrf_token %}
+                    <input type="hidden" name="id" id="id" value="{{subscription.id}}">
+                    <button type="submit" class="btn btn-danger">
                       <i class="fa fa-trash"></i></button
-                  ></a>
+                  ></form>
                 </div>
               </td>
             </tr>
