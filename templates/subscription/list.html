@@ -16,8 +16,8 @@
             <tr>
               <th>NOM</th>
               <th>PRENOMS</th>
-              <th>EMAIL</th>
               <th>TELEPHONE</th>
+              <th>FORFAIT</th>
               <th>DATE DE DEBUT</th>
               <th>DATE DE FIN</th>
               <th>STATUS</th>
@@ -29,8 +29,8 @@
             <tr>
               <td>{{ subscription.surname }}</td>
               <td>{{ subscription.name }}</td>
-              <td>{{ subscription.email }}</td>
               <td>{{ subscription.phone }}</td>
+              <td>{{ subscription.package.name }}</td>
               <td>{{ subscription.startDate|date:'d-m-Y' }}</td>
               <td>{{ subscription.endDate|date:'d-m-Y' }}</td>
               {% if subscription.status %}
@@ -90,8 +90,8 @@
             <tr>
               <th>NOM</th>
               <th>PRENOMS</th>
-              <th>EMAIL</th>
               <th>TELEPHONE</th>
+              <th>FORFAIT</th>
               <th>DATE DE DEBUT</th>
               <th>DATE DE FIN</th>
               <th>STATUS</th>
