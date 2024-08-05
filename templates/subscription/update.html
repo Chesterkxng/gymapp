@@ -102,17 +102,20 @@
           <label for="phone" class="col-sm-3">FORFAIT</label>
           <div class="col-sm-9">
             <select
-              id class="custom-select"
+              id
+              class="custom-select"
               id="package"
               name="package"
               class="form-control"
               required
             >
-            <option value="{{subscription.package.id}}">{{subscription.package.name}}</option>
-            {% for package in packages %}
-            <option value="{{package.id}}"> {{package.name}}</option>
-            {% endfor %}
-          </select>
+              <option value="{{subscription.package.id}}">
+                {{subscription.package.name}}
+              </option>
+              {% for package in packages %}
+              <option value="{{package.id}}">{{package.name}}</option>
+              {% endfor %}
+            </select>
           </div>
         </div>
 

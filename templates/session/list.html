@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block content %}
-<h5 class="mb-0"><strong>ABONNEMENTS</strong></h5>
+<h5 class="mb-0"><strong>SEANCES</strong></h5>
 <span class="text-secondary"
-  >Abonnements <i class="fa fa-angle-right"></i> Liste</span
+  >Séances <i class="fa fa-angle-right"></i> Liste</span
 >
 
 <div class="row mt-3">
@@ -18,44 +18,32 @@
               <th>PRENOMS</th>
               <th>TELEPHONE</th>
               <th>FORFAIT</th>
-              <th>DATE DE DEBUT</th>
-              <th>DATE DE FIN</th>
-              <th>STATUS</th>
+              <th>DATE</th>
+              <th>HEURE</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
-            {% for subscription in subscriptions %}
+            {% for session in sessions %}
             <tr>
-              <td>{{ subscription.surname }}</td>
-              <td>{{ subscription.name }}</td>
-              <td>{{ subscription.phone }}</td>
-              <td>{{ subscription.package.name }}</td>
-              <td>{{ subscription.startDate|date:'d-m-Y' }}</td>
-              <td>{{ subscription.endDate|date:'d-m-Y' }}</td>
-              {% if subscription.status %}
-              <td>
-                <span class="badge badge-success badge-pill">EN COURS</span>
-              </td>
-              {% else %}
-              <td>
-                <span class="badge badge-danger badge-pill"> EXPIRE </span>
-              </td>
-              {% endif %}
+              <td>{{ session.surname }}</td>
+              <td>{{ session.name }}</td>
+              <td>{{ session.phone }}</td>
+              <td>{{ session.package.name }}</td>
+              <td>{{ session.date|date:'d-m-Y' }}</td>
+              <td>{{ session.hour|date:'H:i'}}</td>
+
               <td>
                 <div class="d-flex justify-content-around">
-                  <!--Check if the subscription have been expired for showing reconduction button-->
-                  {% if not subscription.status %}
-                  <form
-                    method="post"
-                    action="{% url 'subscription/reconduct' %}"
-                  >
+                  <!--Check if the session have been expired for showing reconduction button-->
+                  {% if session.status %}
+                  <form method="post" action="{% url 'session/reconduct' %}">
                     {% csrf_token %}
                     <input
                       type="hidden"
                       name="id"
                       id="id"
-                      value="{{subscription.id}}"
+                      value="{{session.id}}"
                     />
                     <button type="submit" class="btn btn-secondary">
                       <i class="fa fa-arrow-right"></i>
@@ -63,25 +51,25 @@
                   </form>
                   {% endif %}
                   <!-- END CHECK-->
-                  <form method="post" action="{% url 'subscription/update' %}">
+                  <form method="post" action="{% url 'session/update' %}">
                     {% csrf_token %}
                     <input
                       type="hidden"
                       name="id"
                       id="id"
-                      value="{{subscription.id}}"
+                      value="{{session.id}}"
                     />
                     <button type="submit" class="btn btn-info">
                       <i class="fa fa-pencil"></i>
                     </button>
                   </form>
-                  <form method="post" action="{% url 'subscription/delete' %}">
+                  <form method="post" action="{% url 'session/delete' %}">
                     {% csrf_token %}
                     <input
                       type="hidden"
                       name="id"
                       id="id"
-                      value="{{subscription.id}}"
+                      value="{{session.id}}"
                     />
                     <button type="submit" class="btn btn-danger">
                       <i class="fa fa-trash"></i>
@@ -100,9 +88,8 @@
               <th></th>
               <th></th>
               <th></th>
-              <th></th>
               <th>
-                <a href="{% url 'subscription/add' %}"
+                <a href="{% url 'session/add' %}"
                   ><button type="button" class="btn btn-primary btn-block">
                     <i class="fa fa-plus"></i></button
                 ></a>
@@ -113,9 +100,8 @@
               <th>PRENOMS</th>
               <th>TELEPHONE</th>
               <th>FORFAIT</th>
-              <th>DATE DE DEBUT</th>
-              <th>DATE DE FIN</th>
-              <th>STATUS</th>
+              <th>DATE</th>
+              <th>HEURE</th>
               <th>ACTIONS</th>
             </tr>
           </tfoot>
