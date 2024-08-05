@@ -46,7 +46,7 @@
                 <div class="d-flex justify-content-around">
                   <!--Check if the subscription have been expired for showing reconduction button-->
                   {% if not subscription.status %}
-                  <form method="post" action="{% url 'reconductSubscription' %}"
+                  <form method="post" action="{% url 'subscription/reconduct' %}"
                     > {% csrf_token %}
                     <input type="hidden" name="id" id="id" value="{{subscription.id}}">
                     <button type="submit" class="btn btn-secondary">
@@ -54,13 +54,13 @@
                   ></form>
                   {% endif %}
                   <!-- END CHECK-->
-                  <form method="post" action="{% url 'updateSubscription' %}"
+                  <form method="post" action="{% url 'subscription/update' %}"
                     >{% csrf_token %}
                     <input type="hidden" name="id" id="id" value="{{subscription.id}}">
                     <button type="submit" class="btn btn-info">
                       <i class="fa fa-pencil"></i></button
                   ></form>
-                  <form method="post" action="{% url 'deleteSubscription' %}"
+                  <form method="post" action="{% url 'subscription/delete' %}"
                     >{% csrf_token %}
                     <input type="hidden" name="id" id="id" value="{{subscription.id}}">
                     <button type="submit" class="btn btn-danger">
@@ -81,7 +81,7 @@
               <th></th>
               <th></th>
               <th>
-                <a href="{% url 'addSubscription' %}"
+                <a href="{% url 'subscription/add' %}"
                   ><button type="button" class="btn btn-primary btn-block">
                     <i class="fa fa-plus"></i></button
                 ></a>
