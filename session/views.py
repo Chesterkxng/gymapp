@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Session, Package
 from datetime import datetime
-from utils.utils import clearMessage
+from utils.utils import clearMessage, currentTime
 
 # Create your views here.
 def sessions(request):
@@ -51,7 +51,7 @@ def updateSession(request):
     packages = Package.objects.all()
     id = request.POST.get('id')
     session = Session.objects.get(id=id)
-
+    today = datetime.now().date()
     # check if reconduction requested if yes reconduct 
     updateStatus = request.POST.get('updateStatus')
     if updateStatus:
@@ -69,8 +69,14 @@ def updateSession(request):
         session.save()
         messages.success(request, "séance modifié avec succès")
         return redirect('sessions')
+    
+    context = {
+        "session": session,
+        "packages": packages,
+        "max_date": today
+    }
 
-    return render(request, 'session/update.html', {"session": session, "packages": packages})
+    return render(request, 'session/update.html', context)
 
     
 # function that update subscription
@@ -103,8 +109,13 @@ def reconductSession(request):
         messages.success(request, "Séance ajouté avec succès")
         return redirect('sessions')
 
+    context = {
+        "session": session,
+        "packages": packages
+    }
+
     
-    return render(request, 'session/reconduct.html', {"session": session, "packages": packages})
+    return render(request, 'session/reconduct.html', context)
 
     # function that deleter a subscription
 def deleteSession(request):
