@@ -24,13 +24,8 @@
     <!--Font Awesome-->
     <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}" />
-    <!--Chartist CSS-->
-    <link rel="stylesheet" href="{% static 'css/chartist.min.css' %}" />
-    <!--Bootstrap Calendar-->
-    <link
-      rel="stylesheet"
-      href="{% static 'js/calendar/bootstrap_calendar.css' %}"
-    />
+
+    {% block header %} {% endblock %}
 
     <!--Alertify CSS-->
     <link
@@ -45,12 +40,6 @@
     <link
       rel="stylesheet"
       href="{% static 'css/themes/default.rtl.min.css' %}"
-    />
-
-    <!--Datatable-->
-    <link
-      rel="stylesheet"
-      href="{% static 'css/dataTables.bootstrap4.min.css' %}"
     />
 
     <title>GYM APP</title>
@@ -287,13 +276,17 @@
             <div class="sidebar-menu-container">
               <ul class="sidebar-menu mt-4 mb-4">
                 <li class="parent">
-                  <a href="{% url 'dashboard' %}" class=""
+                  <a href="#" onclick="toggle_menu('dashboard');" class=""
                     ><i class="fa fa-dashboard plus mr-3"> </i>
                     <span class="none"
                       >TABLEAU DE BORD
                       <i class="fa fa-angle-right pull-right align-bottom"></i
                     ></span>
                   </a>
+                  <ul class="children" id="dashboard">
+                    <li class="child"><a href="{% url 'dashboard/subscriptions' %}" class="ml-4"><i class="fa fa-angle-right mr-2"></i> ABONNEMENTS</a></li>
+                    <li class="child"><a href="{% url 'dashboard/sessions' %}" class="ml-4"><i class="fa fa-angle-right mr-2"></i> SEANCES</a></li>
+                </ul>
                 </li>
                 <li class="parent">
                   <a href="{% url 'subscriptions' %}" class=""
@@ -353,25 +346,17 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!--Sweet alert JS-->
     <script src="{% static 'js/sweetalert.js' %}"></script>
-    <!--Progressbar JS-->
-    <script src="{% static 'js/progressbar.min.js' %}"></script>
-    <!--Charts-->
+ 
     <!--Canvas JS-->
     <script src="{% static 'js/charts/canvas.min.js' %}"></script>
-    <!--Bootstrap Calendar JS-->
-    <script src="{% static 'js/calendar/bootstrap_calendar.js' %}"></script>
-    <script src="{% static 'js/calendar/demo.js' %}"></script>
-    <!--Bootstrap Calendar-->
+  
 
     <!--Custom Js Script-->
     <script src="{% static 'js/custom.js' %}"></script>
     <!--Custom Js Script-->
 
-    <!--Datatable-->
-    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
-    <script type="">
-      $("#example").DataTable();
-    </script>
+    <!-- specific script for each html file-->
+    {% block script %} {% endblock %}
+
   </body>
 </html>

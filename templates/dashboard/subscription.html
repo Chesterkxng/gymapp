@@ -1,0 +1,97 @@
+{% extends 'base.html' %} {% load static %}{% block header %}
+
+<!--Chartist CSS-->
+<link rel="stylesheet" href="{% static 'css/chartist.min.css' %}" />
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+{% endblock %} {% block content %}
+<h5 class="mb-3"><strong>DASHBOARD</strong></h5>
+<h6 class="mb-3"><strong>ABONNEMENTS</strong></h6>
+
+<!--Dashboard widget-->
+<div class="mt-1 mb-3 button-container">
+  <div class="row pl-0">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+      <div class="bg-white border shadow">
+        <div class="media p-4">
+          <div
+            class="align-self-center mr-3 rounded-circle notify-icon bg-theme"
+          >
+            <i class="fa fa-user-plus"></i>
+          </div>
+          <div class="media-body pl-2">
+            <h3 class="mt-0 mb-0"><strong>{{pending_subcriptions}}</strong></h3>
+            <p>
+              <small class="text-muted bc-description">Abonnements</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for package_name, subscriptions in pending_subscriptions_by_type.items %}
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+      <div class="bg-white border shadow">
+        <div class="media p-4">
+          <div
+            class="align-self-center mr-3 rounded-circle notify-icon bg-info"
+          >
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="media-body pl-2">
+            <h3 class="mt-0 mb-0"><strong>{{subscriptions}}</strong></h3>
+            <p>
+              <small class="text-muted bc-description">{{package_name}}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!--/Dashboard widget-->
+
+<div class="row mt-3">
+  <div class="col-sm-6">
+    <!--Doughnut Chart-->
+    <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+      <h6 class="mb-2">Repartition par type</h6>
+
+      <div
+        class="ct-chart"
+        id="donutChartChartist"
+        data-labels="{{pending_subscriptions_donut_labels }}"
+        data-series="{{pending_subscriptions_donut_series}}"
+        style="height: 200px"
+      ></div>
+    </div>
+    <!--/Doughnut Chart-->
+  </div>
+</div>
+<h6 class="mb-3"><strong>HISTORIQUE</strong></h6>
+<div class="row mt-3">
+  <div class="col-sm-6">
+    <!--Bar Chart-->
+    <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+      <h6 class="mb-2">Historique Mensuel d'Abonnements</h6>
+
+      <div
+        class="ct-chart"
+        id="overlapBarchartChartist"
+        data-series="{{monthly_subs_count}}"
+        style="height: 300px"
+      ></div>
+    </div>
+    <!--/Bar Chart-->
+  </div>
+</div>
+
+{% endblock %} {% block script %} {% load static %}
+
+<!--Chartist.JS-->
+<script src="{% static 'js/charts/chartist.min.js' %}"></script>
+<script src="{% static 'js/charts/subscription/donut.js' %}"></script>
+<script src="{% static 'js/charts/subscription/bar.js' %}"></script>
+
+{% endblock %}

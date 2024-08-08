@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %}{% block header %}
+<!--Datatable-->
+<link
+  rel="stylesheet"
+  href="{% static 'css/dataTables.bootstrap4.min.css' %}"
+/>
+
+{% endblock %} {% block content %}
 <h5 class="mb-0"><strong>ABONNEMENTS</strong></h5>
 <span class="text-secondary"
   >Abonnements <i class="fa fa-angle-right"></i> Liste</span
@@ -125,4 +132,13 @@
     <!--/Datatable-->
   </div>
 </div>
+{% endblock %} {% block script %}
+
+<!--Datatable-->
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
+<script type="">
+  $("#example").DataTable();
+</script>
+
 {% endblock %}

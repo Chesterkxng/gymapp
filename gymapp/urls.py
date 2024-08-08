@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('subscription.urls')),
     path('', include('session.urls')),
+    path('', include('dashboard.urls'))
 ]
