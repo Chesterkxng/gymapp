@@ -26,3 +26,33 @@ var options = {
 
 var chart = new ApexCharts(document.querySelector("#donutChartChartist"), options);
 chart.render();
+
+
+var donutChart2 = document.getElementById('donutChartChartistFinance');
+var data_labels2 = donutChart2.getAttribute('data-labels');
+var data_series2 = donutChart2.getAttribute('data-series');
+
+var dlabels2 = JSON.parse(data_labels2.replace(/'/g, '"'));
+var dseries2 = JSON.parse(data_series2.replace(/'/g, '"'));
+
+var options2 = {
+  chart: {
+      type: 'donut',
+      height: 350
+  },
+  series: dseries2,
+  labels: dlabels2,
+  legend: {
+      position: 'bottom'
+  },
+  plotOptions: {
+    pie: {
+      donut: {
+        size: '70%'
+      }
+    }
+  },
+};
+
+var chart = new ApexCharts(document.querySelector("#donutChartChartistFinance"), options2);
+chart.render();

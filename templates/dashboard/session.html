@@ -52,17 +52,96 @@
 </div>
 <!--/Dashboard widget-->
 
+<h6 class="mb-3"><strong>FINANCES</strong></h6>
+<!--Dashboard widget-->
+<div class="mt-1 mb-3 button-container">
+  <div class="row pl-0">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+      <div class="bg-white border shadow">
+        <div class="media p-4">
+          <div
+            class="align-self-center mr-3 rounded-circle notify-icon bg-danger"
+          >
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <div class="media-body pl-2">
+            <h3 class="mt-0 mb-0"><strong>{{current_month_sessions_amount}}</strong></h3>
+            <p>
+              <small class="text-muted bc-description">TTC</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for package_name, amount in current_month_sessions_amount_by_type.items %}
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
+      <div class="bg-white border shadow">
+        <div class="media p-4">
+          <div
+            class="align-self-center mr-3 rounded-circle notify-icon bg-info"
+          >
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div class="media-body pl-2">
+            <h3 class="mt-0 mb-0"><strong>{{amount}}</strong></h3>
+            <p>
+              <small class="text-muted bc-description">{{package_name}}</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<!--/Dashboard widget-->
+
 <div class="row mt-3">
   <div class="col-sm-6">
     <!--Doughnut Chart-->
     <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
-      <h6 class="mb-2">Repartition par type</h6>
+      <h6 class="mb-2">Repartition par type (Seances)</h6>
 
       <div
         class="ct-chart"
         id="donutChartChartist"
         data-labels="{{current_month_sessions_donut_labels }}"
         data-series="{{current_month_sessions_donut_series}}"
+        style="height: 200px"
+      ></div>
+    </div>
+    <!--/Doughnut Chart-->
+  </div>
+
+  <div class="col-sm-6">
+    <!--Doughnut Chart-->
+    <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+      <h6 class="mb-2">Repartition par type (FINANCES)</h6>
+
+      <div
+        class="ct-chart"
+        id="donutChartChartistFinance"
+        data-labels="{{current_month_sessions_amount_donut_labels}}"
+        data-series="{{current_month_sessions_amount_donut_series}}"
+        style="height: 200px"
+      ></div>
+    </div>
+    <!--/Doughnut Chart-->
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-sm-6">
+    <!--Doughnut Chart-->
+    <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+      <h6 class="mb-2">Rapport d'affluence</h6>
+
+      <div
+        class="ct-chart"
+        id="barChart"
+        data-hours="{{sessions_by_hour_hours }}"
+        data-series="{{sessions_by_hour_count}}"
         style="height: 200px"
       ></div>
     </div>
@@ -78,8 +157,22 @@
 
       <div
         class="ct-chart"
-        id="overlapBarchartChartist"
-        data-series="{{monthly_sessions_count}}"
+        id="stackedBarChart"
+        data-series="{{sessions_count_per_type}}"
+        style="height: 300px"
+      ></div>
+    </div>
+    <!--/Bar Chart-->
+  </div>
+  <div class="col-sm-6">
+    <!--Bar Chart-->
+    <div class="mt-1 mb-3 p-3 button-container bg-white shadow-sm border">
+      <h6 class="mb-2">Historique Mensuel des séances (Finances)</h6>
+
+      <div
+        class="ct-chart"
+        id="stackedBarChartFinance"
+        data-series="{{monthly_amounts_per_type}}"
         style="height: 300px"
       ></div>
     </div>
@@ -91,7 +184,8 @@
 
 <!--Chartist.JS-->
 <script src="{% static 'js/charts/chartist.min.js' %}"></script>
-<script src="{% static 'js/charts/subscription/donut.js' %}"></script>
-<script src="{% static 'js/charts/subscription/bar.js' %}"></script>
+<script src="{% static 'js/charts/session/donut.js' %}"></script>
+<script src="{% static 'js/charts/session/bar.js' %}"></script>
+<script src="{% static 'js/charts/session/stackedBar.js' %}"></script>
 
 {% endblock %}
